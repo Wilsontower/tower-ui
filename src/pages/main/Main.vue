@@ -4,6 +4,7 @@
     <div id="container">
       <main-page></main-page>
     </div>
+    <div style="clear:both;"></div>
     <bottom-footer></bottom-footer>
   </div>
 

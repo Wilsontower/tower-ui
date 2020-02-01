@@ -25,6 +25,7 @@ export default {
     font-family: "PingFang SC";
     font-size: 16px;
     padding: 50px;
-    // box-shadow: 0 -4px 5px 3px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 -4px 5px 3px rgba(0, 0, 0, 0.15);
+    margin-top: 100px;
   }
 </style>

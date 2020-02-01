@@ -13,7 +13,8 @@
                @select="handleSelect"
                background-color="#545c64"
                text-color="#fff"
-               active-text-color="#ffd04b">
+               active-text-color="#ffd04b"
+               router>
         <el-menu-item v-for="item in routes"
                       :key="item.path"
                       :index="item.path"
@@ -39,10 +40,6 @@ export default {
         {
           path: '/',
           name: '首页'
-        },
-        {
-          path: '/app',
-          name: '应用'
         },
         {
           path: '/message',
@@ -76,8 +73,6 @@ export default {
         window.pageYOffset ||
         document.documentElement.scrollTop ||
         document.body.scrollTop
-
-      console.log(scrollTop)
       if (scrollTop > 399) {
         this.navBarFixed = true
       } else {
