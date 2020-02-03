@@ -16,6 +16,7 @@
       <el-card class="box-card"
                v-for="item in 10"
                :key="item"
+               @click.native="goToSiteDetails(item)"
                shadow="hover">
         <card></card>
         <div style="padding: 5px;">
@@ -65,7 +66,10 @@ export default {
     }
   },
   methods: {
-
+    goToSiteDetails (id) {
+      console.log(id)
+      this.$router.push('/site')
+    }
   }
 }
 </script>
@@ -82,15 +86,14 @@ export default {
     line-height: 250px;
   }
   .website-part{
-    width: 100%;
+    width: 93%;
     margin-left: 7%;
     margin-top: 25px;
   }
   .app-part{
-    width: 100%;
+    width: 93%;
     margin-left: 7%;
     margin-top: 25px;
-    height: 200px;
   }
   .box-card {
     width: 250px;
@@ -102,7 +105,7 @@ export default {
   }
 
   .app-cards {
-    width: 42.5%;
+    width: 45.5%;
     height: 250px;
     float: left;
     position: relative;

@@ -43,8 +43,6 @@ export default {
   }
   #container{
     min-height: 1200px;
-    /*box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);*/
-    /*background-color: #f5f5f5;*/
   }
   .home{
     min-height: 1200px;
