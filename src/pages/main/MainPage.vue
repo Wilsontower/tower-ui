@@ -14,15 +14,15 @@
     <el-divider><span style="font-size: 24px;font-family: 'Microsoft YaHei'">实用网站</span></el-divider>
     <div class="website-part">
       <el-card class="box-card"
-               v-for="item in 10"
-               :key="item"
+               v-for="item in sites"
+               :key="item.siteId"
                @click.native="goToSiteDetails(item)"
                shadow="hover">
         <card></card>
         <div style="padding: 5px;">
-          <span>名称</span>
+          <span>{{item.siteName}}</span>
           <div class="bottom clearfix">
-            <div class="info">{{ currentDate }}</div>
+            <div class="info">{{ item.introduction }}</div>
           </div>
         </div>
       </el-card>
@@ -50,11 +50,13 @@
 <script>
 import Card from '../../common/Card'
 import AppCard from '../../common/AppCard'
+import axios from 'axios'
 export default {
   name: 'MainPage',
   components: {AppCard, Card},
   data () {
     return {
+      sites: [],
       currentDate: new Date(),
       carousel: [
         '@/assets/carousel/img1.png',
@@ -65,10 +67,25 @@ export default {
       ]
     }
   },
+  mounted () {
+    this.getSites()
+  },
   methods: {
-    goToSiteDetails (id) {
-      console.log(id)
+    goToSiteDetails (site) {
+      window.sessionStorage.setItem('site', JSON.stringify(site))
       this.$router.push('/site')
+    },
+    getSites () {
+      let self = this
+      let getSiteUrl = this.$req.towerApi + 'site/getall'
+      axios.get(getSiteUrl)
+        .then(res => {
+          console.log('网站:', res)
+          self.sites = res.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }

@@ -7,21 +7,14 @@
       <div class="main-info">
         <div class="site-info">
           <div class="details">
-            <span class="title">XXX标题</span>
-            <p><strong>简介：</strong>这里是简介这里是简介这里是简介这里是简介这里是简介这里
-              是简介这里是简介这里是简介这里是简介这里是简介,
-              这里是简介这里是简介这里是简介这里是简介这里是简介这里
-              是简介这里是简介这里是简介这里是简介这里是简介
-              这里是简介这里是简介这里是简介这里是简介这里是简介这里
-              是简介这里是简介这里是简介这里是简介这里是简介
-              这里是简介这里是简介这里是简介这里是简介这里是简介这里
-              是简介这里是简介这里是简介这里是简介这里是简介
-              这里是简介这里是简介这里是简介这里是简介这里是简介这里
-              是简介这里是简介这里是简介这里是简介这里是简介</p>
+            <h3 class="title">{{site.siteName}}</h3>
+            <p style="line-height: 30px;"><strong>简介：</strong>{{site.description}}</p>
           </div>
           <div class="link">
-            <p><strong>链接：</strong>http://www.xxxxxxxxxxxxxxx.com</p>
-            <el-button class="el-button--primary enter" ><span style="font-size: 20px">进入</span></el-button>
+            <el-input class="url-input" placeholder="可复制网址" :value="site.siteUrl">
+              <template slot="prepend">链接</template>
+            </el-input>
+            <el-button class="el-button--primary enter" @click="gotoSite(site.siteUrl)" ><span style="font-size: 20px">进入</span></el-button>
           </div>
         </div>
         <div class="site-img">
@@ -46,7 +39,14 @@ import BottomFooter from '../../common/Footer'
 export default {
   name: 'SiteDetails',
   components: {BottomFooter, TopNav},
+  data () {
+    return {
+      site: {}
+    }
+  },
   mounted () {
+    let siteInfo = window.sessionStorage.getItem('site')
+    this.site = JSON.parse(siteInfo)
     // 解决：Vue路由跳转到新页面时 默认在页面最底部 而不是最顶部
     this.$router.afterEach((to, from, next) => {
       window.scrollTo(0, 0)
@@ -55,6 +55,9 @@ export default {
   methods: {
     goBack () {
       this.$router.push('/')
+    },
+    gotoSite (url) {
+      window.open(url)
     }
   }
 }
@@ -91,10 +94,12 @@ export default {
 }
 .title{
   font-size: 26px;
+  text-align: center;
 }
 .details{
   text-align: left;
   float: left;
+  line-height:18px;
 }
 .link{
   width: 80%;
@@ -102,9 +107,13 @@ export default {
   margin-left: 10%;
   text-align: center;
   font-size: 20px;
+  margin-top: 290px;
+}
+.url-input{
+  margin-bottom: 25px;
 }
   .enter{
-    margin-top: 30px;
+    margin-bottom: 30px;
     width: 200px;
   }
 </style>
